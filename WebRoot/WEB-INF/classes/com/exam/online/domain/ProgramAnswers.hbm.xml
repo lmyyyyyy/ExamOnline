@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.exam.online.domain.ProgramAnswers" table="programanswers">
+		<id name="id" column="id" type="integer">
+			<generator class="increment" />
+		</id>
+		<property name="subject" column="subject" type="string" length="20" />
+		<property name="snumber" column="snumber" type="string" length="20" />
+		<property name="sname" column="sname" type="string" length="20" />
+		<property name="sclas" column="sclas" type="string" length="20" />
+		<property name="enumber" column="enumber" type="string" length="20" />
+		<property name="ename" column="ename" type="string" length="20" />
+		<property name="escore" column="escore" type="integer" length="20" />
+		<property name="first" column="first" type="string" length="2000" />
+		<property name="second" column="second" type="string" length="2000" />
+		<property name="third" column="third" type="string" length="2000" />
+		<property name="forth" column="forth" type="string" length="2000" />
+		<property name="fifth" column="fifth" type="string" length="2000" />
+		<property name="score" column="score" type="integer" length="20" />
+		<property name="status" column="status" type="integer" length="1" />
+		<property name="regDate" column="regdate" type="timestamp" update="false"/>
+	</class>	
+</hibernate-mapping>    

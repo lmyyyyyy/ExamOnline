@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.exam.online.domain.Student" table="student">
+		<id name="id" column="id" type="integer">
+			<generator class="increment" />
+		</id>
+		<property name="number" column="number" type="string" length="20" />
+		<property name="password" column="password" type="string" length="50" />
+		<property name="name" column="name" type="string" length="20" />
+		<property name="syear" column="syear" type="string" length="20" />
+		<property name="major" column="major" type="string" length="20" />
+		<property name="clas" column="clazz" type="string" length="20" />
+		<property name="status" type="integer" length="1" >
+			<column name="status" default="0"></column>
+		</property>
+		<property name="regDate" column="regdate" type="timestamp" update="false"/>
+	</class>	
+</hibernate-mapping>    

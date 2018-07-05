@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.exam.online.domain.MultipleChoice" table="multiplechoice">
+		<id name="id" column="id" type="integer">
+			<generator class="increment" />
+		</id>
+		<property name="number" column="number" type="string" length="20" />
+		<property name="question" column="question" type="string" length="100" />
+		<property name="choicea" column="choicea" type="string" length="100" />
+		<property name="choiceb" column="choiceb" type="string" length="100" />
+		<property name="choicec" column="choicec" type="string" length="100" />
+		<property name="choiced" column="choiced" type="string" length="100" />
+		<property name="choicee" column="choicee" type="string" length="100" />
+		<property name="choicef" column="choicef" type="string" length="100" />
+		<property name="answer" column="answer" type="string" length="100" />
+		<property name="subject" column="subject" type="string" length="20" />
+		<property name="author" column="author" type="string" length="20" />
+		<property name="regDate" column="regdate" type="timestamp" update="false"/>
+		<property name="difficult" column="difficult" type="integer" length="10" />
+	</class>	
+</hibernate-mapping>    

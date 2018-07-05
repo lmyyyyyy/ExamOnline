@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<!-- 简单主题 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<package name="ExamOL" namespace="/" extends="struts-default">
+	<interceptors>
+			<!-- <interceptor name="loginInterceptor" class="com.exam.online.interceptor.ChekLoginInterceptor"/>   -->
+			<!-- 自定义拦截器栈 -->
+			<interceptor-stack name="examOL">
+				<!-- <interceptor-ref name="loginInterceptor"/> -->
+				<interceptor-ref name="defaultStack">
+					<param name="modelDriven.refreshModelBeforeResult">true</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 定义默认栈 -->
+		<default-interceptor-ref name="examOL" />
+
+		<!-- 定义全局结果 -->
+		<global-results>
+			<result name="login">/exam/login.jsp</result>
+		</global-results>
+		
+		<!-- compileAction -->
+		<action name="compileAction" class="compileAction" method="compileAjax">
+		</action>
+
+		<!-- compileAction -->
+		<action name="compileTeaAction" class="compileTeaAction" method="compileTeaAjax">
+		</action>
+
+		<!-- regAction -->
+		<action name="RegAction_*" class="regAction" method="{1}">
+			<result name="regPage">/exam/regStudent.jsp</result>
+			<result name="success">/exam/login.jsp</result>
+			<result name="input">/exam/regStudent.jsp</result>
+		</action>
+		
+		<!-- RegTeaAction -->
+		<action name="RegTeaAction_*" class="regTeaAction" method="{1}">
+			<result name="regTeaPage">/exam/regTeacher.jsp</result>
+			<result name="success">/exam/login.jsp</result>
+			<result name="input">/exam/regTeacher.jsp</result>
+		</action>
+		
+		<!-- loginAction -->
+		<action name="LoginAction_*" class="loginAction" method="{1}">
+			<result name="loginPage" >/exam/login.jsp</result>
+			<result name="toStudent" type="redirect">/student/index.jsp</result>
+			<result name="toTeacher" type="redirect">/teacher/index.jsp</result>
+			<result name="toManager" type="redirect">/manager/index.jsp</result>
+			<result name="error">/exam/login.jsp</result>
+			<result name="input">/exam/login.jsp</result>
+		</action>
+		
+		<!-- ModifyTPasswordAction_* -->
+		<action name="ModifyTPasswordAction_*" class="modifyTPasswordAction" method="{1}">
+			<result name="toModify">/teacher/modifyPass.jsp</result>
+			<result name="toLogin" type="redirect">/exam/logout.jsp</result>
+			<result name="input">/teacher/modifyPass.jsp</result>
+		</action>
+		
+		<!-- ModifySPasswordAction_* -->
+		<action name="ModifySPasswordAction_*" class="modifySPasswordAction" method="{1}">
+			<result name="toModify">/student/modifyPass.jsp</result>
+			<result name="toLogin" type="redirect">/exam/logout.jsp</result>
+			<result name="input">/student/modifyPass.jsp</result>
+		</action>
+		
+		<!-- StudentListAction_* -->
+		<action name="StudentListAction_*" class="studentListAction" method="{1}">
+			<result name="toStudentListPage">/manager/studentListPage.jsp</result>
+			<result name="modifyStudent">/manager/modifyStudent.jsp</result>
+			<result name="toStudentList">/teacher/studentListPage.jsp</result>
+			<result name="input">${inputPage}</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">StudentListAction_findStudentList</param>
+			</result>
+			<result name="findAllStuAction" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">StudentListAction_findStudentList</param>
+			</result>
+		</action>
+		
+		<!-- TeacherListAction_** -->
+		<action name="TeacherListAction_*" class="teacherListAction" method="{1}">
+			<result name="toTeacherListPage">/manager/teacherListPage.jsp</result>
+			<result name="modifyTeacher">/manager/modifyTeacher.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">TeacherListAction_findTeacherList</param>
+			</result>
+			<result name="findAllTeaAction" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">TeacherListAction_findTeacherList</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		<!-- LogOutAction_* -->
+		<action name="LogOutAction_*" class="logOutAction" method="{1}">
+			<result name="success">/exam/logout.jsp</result>
+		</action>
+		
+		<!-- SubjectsAction_* -->
+		<action name="SubjectsAction_*" class="subjectsAction" method="{1}">
+			<result name="findAllSubjects">/teacher/allSubjects.jsp</result>
+			<result name="modifySubjects">/teacher/modifySubjects.jsp</result>
+			<result name="tofindAllSubjects" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SubjectsAction_allSubjects</param>
+			</result>
+			<result name="deleteSubjects" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SubjectsAction_allSubjects</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SubjectsAction_allSubjects</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		<!-- SingleChoiceAction_* -->
+		<action name="SingleChoiceAction_*" class="singleChoiceAction" method="{1}">
+			<result name="findAllSingleChoice">/teacher/allSingleChoice.jsp</result>
+			<result name="toAddSingle">/teacher/addSingleChoice.jsp</result>
+			<result name="viewSingleChoice">/teacher/viewSingleChoice.jsp</result>
+			<result name="modifySingleChoice">/teacher/modifySingleChoice.jsp</result>
+			<result name="tofindAllSingleChoice" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SingleChoiceAction_allSingleChoice</param>
+			</result>
+			<result name="deleteSingleChoice" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SingleChoiceAction_allSingleChoice</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SingleChoiceAction_allSingleChoice</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		<!-- MultipleChoiceAction_* -->
+		<action name="MultipleChoiceAction_*" class="multipleChoiceAction" method="{1}">
+			<result name="findAllMultipleChoice">/teacher/allMultipleChoice.jsp</result>
+			<result name="viewMultipleChoice">/teacher/viewMultipleChoice.jsp</result>
+			<result name="modifyMultipleChoice">/teacher/modifyMultipleChoice.jsp</result>
+			<result name="toAddMultiple">/teacher/addMultipleChoice.jsp</result>
+			<result name="tofindAllMultipleChoice" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">MultipleChoiceAction_allMultipleChoice</param>
+			</result>
+			<result name="deleteMultipleChoice" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">MultipleChoiceAction_allMultipleChoice</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">MultipleChoiceAction_allMultipleChoice</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		
+		<!-- BlankAction_* -->
+		<action name="BlankAction_*" class="blankAction" method="{1}">
+			<result name="findAllBlank">/teacher/allBlank.jsp</result>
+			<result name="viewBlank">/teacher/viewBlank.jsp</result>
+			<result name="modifyBlank">/teacher/modifyBlank.jsp</result>
+			<result name="toAddBlank">/teacher/addBlank.jsp</result>
+			<result name="tofindAllBlank" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">BlankAction_allBlank</param>
+			</result>
+			<result name="deleteBlank" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">BlankAction_allBlank</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">BlankAction_allBlank</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		<!-- ProgramAction_* -->
+		<action name="ProgramAction_*" class="programAction" method="{1}">
+			<result name="findAllProgram">/teacher/allProgram.jsp</result>
+			<result name="viewProgram">/teacher/viewProgram.jsp</result>
+			<result name="modifyProgram">/teacher/modifyProgram.jsp</result>
+			<result name="toAddProgram">/teacher/addProgram.jsp</result>
+			<result name="tofindAllProgram" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">ProgramAction_allProgram</param>
+			</result>
+			<result name="deleteProgram" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">ProgramAction_allProgram</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">ProgramAction_allProgram</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		<!-- JudgmentAction_* -->
+		<action name="JudgmentAction_*" class="judgmentAction" method="{1}">
+			<result name="findAllJudgment">/teacher/allJudgment.jsp</result>
+			<result name="viewJudgment">/teacher/viewJudgment.jsp</result>
+			<result name="modifyJudgment">/teacher/modifyJudgment.jsp</result>
+			<result name="toAddJudgment">/teacher/addJudgment.jsp</result>
+			<result name="tofindAllJudgment" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">JudgmentAction_allJudgment</param>
+			</result>
+			<result name="deleteJudgment" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">JudgmentAction_allJudgment</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">JudgmentAction_allJudgment</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		<!-- PaperAction_* -->
+		<action name="PaperAction_*" class="paperAction" method="{1}">
+			<result name="findAllPaper">/teacher/allPaper.jsp</result>
+			<result name="mfindAllPaper">/manager/allPaper.jsp</result>
+			<result name="findMyPaper">/teacher/myPaper.jsp</result>
+			<result name="findCurrentPaper">/teacher/currentExamingPaper.jsp</result>
+			<result name="mfindCurrentPaper">/manager/currentExamingPaper.jsp</result>
+			<result name="sfindCurrentPaper">/student/currentExamingPaper.jsp</result>
+			<result name="toAddPaper">/teacher/autoAddPaper.jsp</result>
+			<result name="toAddProgramPaper">/teacher/autoAddProgramPaper.jsp</result>
+			<result name="saveAnswer">/student/success.jsp</result>
+			<result name="viewPaper">/teacher/viewPaper.jsp</result>
+			<result name="sviewPaper">/student/viewPaper.jsp</result>
+			<result name="changeStatus" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">PaperAction_myPaper</param>
+			</result>
+			<result name="mchangeStatus" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">PaperAction_mallPaper</param>
+			</result>
+			<result name="deletePaper" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">PaperAction_myPaper</param>
+			</result>
+			<result name="mdeletePaper" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">PaperAction_mallPaper</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">PaperAction_myPaper</param>
+			</result>
+			<result name="finishSave" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">PaperAction_scurrentPaper</param>
+			</result>
+			<result name="saveProgramSuccess" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">PaperAction_myPaper</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		<!-- ResultsAction_* -->
+		<action name="ResultsAction_*" class="resultsAction" method="{1}">
+			<result name="toQueryResults">/student/myResults.jsp</result>
+			<result name="allResults">/teacher/allResults.jsp</result>
+			<result name="modify">/teacher/modifyResults.jsp</result>
+			<result name="view">/teacher/viewResults.jsp</result>
+			<result name="saveOrUpdate" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">ResultsAction_allResults</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">PaperAction_scurrentPaper</param>
+			</result>
+			<result name="updateScore" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">ProgramAnswersAction_findAll</param>
+			</result>
+			<result name="input">${inputPage}</result>
+		</action>
+		
+		<!-- ProgramAnswers_* -->
+		<action name="ProgramAnswersAction_*" class="programAnswersAction" method="{1}">
+			<result name="findAll">/teacher/allProgramAnswers.jsp</result>
+			<result name="modify">/teacher/modifyPanswers.jsp</result>
+		</action>
+		
+		<action name="CollectResultsAction" class="collectResultsAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel;charset=utf-8</param>
+				<param name="inputName">is</param>
+				<param name="contentDisposition">
+					attachement;filename=${ename}
+				</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+	</package>
+</struts>

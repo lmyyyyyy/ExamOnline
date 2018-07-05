@@ -1,0 +1,24 @@
+.tick
+{
+    width: 17px;
+    height: 17px;
+    float: right;
+    background: url(../images/validate.png);
+    background-position: 0px -32px;
+    display: block;
+    /*text-decoration: none;
+    vertical-align:middle;*/
+}
+
+/*Loads error picture*/
+.error
+{
+    width: 17px;
+    height: 17px;
+    float: right;
+    background: url(../images/validate.png);
+    background-position: 0px -15px;
+    display: block;
+    /*text-decoration: none;
+    vertical-align:middle;*/
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.exam.online.domain.Results" table="results">
+		<id name="id" column="id" type="integer">
+			<generator class="increment" />
+		</id>
+		<property name="subjcet" column="subjcet" type="string" length="20" />
+		<property name="snumber" column="snumber" type="string" length="20" />
+		<property name="sname" column="sname" type="string" length="20" />
+		<property name="sclas" column="sclas" type="string" length="20" />
+		<property name="enumber" column="enumber" type="string" length="20" />
+		<property name="ename" column="ename" type="string" length="20" />
+		<property name="singleScore" column="singlescore" type="integer" length="20" />
+		<property name="multipleScore" column="multiplescore" type="integer" length="20" />
+		<property name="blankScore" column="blankscore" type="integer" length="20" />
+		<property name="judgmentScore" column="judgmentscore" type="integer" length="20" />
+		<property name="programScore" column="programscore" type="integer" length="20" />
+		<property name="singleAnswer" column="singleanswer" type="string" length="200" />
+		<property name="multipleAnswer" column="multipleanswer" type="string" length="200" />
+		<property name="blankAnswer" column="blankanswer" type="string" length="500" />
+		<property name="judgmentAnswer" column="judgmentanswer" type="string" length="500" />
+		<property name="programAnswer" column="programanswer" type="string" length="2000" />
+		<property name="totalScore" column="totalscore" type="integer" length="10" />
+		<property name="regDate" column="regdate" type="timestamp" update="false"/>
+	</class>	
+</hibernate-mapping>    

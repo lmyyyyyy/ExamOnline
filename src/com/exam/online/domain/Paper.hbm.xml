@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.exam.online.domain.Paper" table="paper">
+		<id name="id" column="id" type="integer">
+			<generator class="increment" />
+		</id>
+		<property name="number" column="number" type="string" length="20" />
+		<property name="name" column="name" type="string" length="100" />
+		<property name="singleCount" column="singlecount" type="integer" length="10" />
+		<property name="multipleCount" column="multiplecount" type="integer" length="10" />
+		<property name="blankCount" column="blankcount" type="integer" length="10" />
+		<property name="judgmentCount" column="judgmentcount" type="integer" length="10" />
+		<property name="programCount" column="programcount" type="integer" length="10" />
+		<property name="subject" column="subject" type="string" length="20" />
+		<property name="author" column="author" type="string" length="20" />
+		<property name="regDate" column="regdate" type="timestamp" update="false"/>
+		<property name="difficult" column="difficult" type="integer" length="10" />
+		<property name="status" column="status" type="integer" length="10" />
+		<property name="score" column="score" type="integer" length="10" />
+		<property name="style" column="style" type="string" length="20" />
+	</class>	
+</hibernate-mapping>    

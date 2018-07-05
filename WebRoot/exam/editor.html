@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Editor</title>
+<style type="text/css">
+#editor{
+	width:800px;
+	height:200px;
+	border:1px solid #ccc;
+}
+</style>
+</head>
+<body>
+
+<pre id="editor">public class Main{
+	public static void main (String[] args) {
+		System.out.println("Hello World!");
+	}
+}</pre>
+
+<script src="../ace-builds-master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="../ace-builds-master/src-noconflict/ext-language_tools.js"></script>
+<script>
+ace.require("ace/ext/language_tools");
+var editor = ace.edit("editor");
+editor.setOptions({
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: true
+});
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setMode("ace/mode/java");
+editor.getSession().setTabSize(2);
+document.getElementById('editor').style.fontSize='14px';
+editor.getSession().setUseWrapMode(true);
+editor.setHighlightActiveLine(false);
+</script>
+
+</body>
+</html>
